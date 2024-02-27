@@ -9,16 +9,24 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  
   <servlet>
     <description></description>
-    <display-name>LifeCycle</display-name>
-    <servlet-name>LifeCycle</servlet-name>
-    <servlet-class>pkg01_lifecycle.LifeCycle</servlet-class>
+    <display-name>Lifecycle</display-name>
+    <servlet-name>Lifecycle</servlet-name>
+    <servlet-class>pkg01_lifecycle.Lifecycle</servlet-class>
   </servlet>
-  
   <servlet-mapping>
-    <servlet-name>LifeCycle</servlet-name>
-    <url-pattern>/cycle</url-pattern>
+    <servlet-name>Lifecycle</servlet-name>
+    <url-pattern>/Lifecycle</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MyRequset</display-name>
+    <servlet-name>MyRequset</servlet-name>
+    <servlet-class>pkg02_request.MyRequset</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MyRequset</servlet-name>
+    <url-pattern>/requset</url-pattern>
   </servlet-mapping>
 </web-app>

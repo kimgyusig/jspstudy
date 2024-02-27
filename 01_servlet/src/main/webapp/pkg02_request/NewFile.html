@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+  <!-- <a> 태그 요청 -->
+  <div>
+    <a id="link" data-number="10" data-number2="1.5">요청</a>
+  </div>
+  <script>
+    var link = document.getElementById('link');
+    link.href = '/servlet/request?number=' + link.dataset.number + '&number2=' + link.dataset.number2;
+  </script>
+
+</body>
+</html>
