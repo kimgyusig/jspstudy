@@ -40,7 +40,7 @@ import java.io.IOException;
 
 @WebServlet("/life")  /* http://localhost:8080/servlet/life 주소를 입력하면 현재 Servlet이 실행된다. */
 
-public class Lifecycle extends HttpServlet {
+public class LifeCycle extends HttpServlet {
   
   private static final long serialVersionUID = 1L;
        
@@ -51,7 +51,7 @@ public class Lifecycle extends HttpServlet {
    * 1. Servlet 생성할 때 호출된다.
    * 2. 생성자 호출 이후에는 자동으로 init() 메소드가 호출된다.
    */
-  public Lifecycle() {
+  public LifeCycle() {
     super();
     System.out.println("LifeCycle 생성자 호출");
   }
