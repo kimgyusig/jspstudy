@@ -14,7 +14,6 @@ public class MyRequest extends HttpServlet {
   private static final long serialVersionUID = 1L;
        
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     // 1. 요청 UTF-8 인코딩
     request.setCharacterEncoding("UTF-8");
     
@@ -33,8 +32,9 @@ public class MyRequest extends HttpServlet {
     /* Optional<T> 클래스를 이용한 [null & 빈 문자열] 처리 */
     String strNumber2 = request.getParameter("number2");
     Optional<String> opt = Optional.ofNullable(strNumber2);
-    double number2 = Double.parseDouble(opt.orElse("0").isEmpty() ? "0" : strNumber2);
+    double number2 = Double.parseDouble(opt.orElse("0").isEmpty() ? "0" : opt.orElse("0"));
     System.out.println(number2);
+    
     
   }
 
