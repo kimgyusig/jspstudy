@@ -26,11 +26,11 @@ public class Upload extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 	  // 업로드 경로 (톰캣 내부 경로)
-	  String uploadPath = request.getServletContext().getRealPath("upload"); //request.getServletContext()프로젝트시작부터종료될때까지스코프
+	 String uploadPath = request.getServletContext().getRealPath("upload"); //request.getServletContext()프로젝트시작부터종료될때까지스코프
 	  File uploadDir = new File(uploadPath);
 	  if(!uploadDir.exists()) {
 	    uploadDir.mkdirs();
-	  }
+	  } 
 	  
 	  String originalFilename = null;
 	  String filesystemName = null;
@@ -40,12 +40,12 @@ public class Upload extends HttpServlet {
 	   // System.out.println(part.getName() + "," + part.getContentType() + "," + part.getSize());
 	   // System.out.println(part.getHeader("Content-Disposition"));
 	    if(part.getHeader("Content-Disposition").contains("filename")) {
-	      if(part.getSize() > 0) {
+	      if(part.getSize() > 0) { // 파일크기
 	        originalFilename = part.getSubmittedFileName();	        
 	      }
 	    }
 	    if(originalFilename != null) {
-	      int point = originalFilename.lastIndexOf("."); // 점부터 끝까지
+	      int point = originalFilename.lastIndexOf("."); // 점부터 끝까지 architecture3.jpg
 	      String extName = originalFilename.substring(point); // .jpg
 	      String fileName = originalFilename.substring(0,point);
 	      filesystemName = fileName + "_" + System.currentTimeMillis() + extName;
@@ -64,18 +64,37 @@ public class Upload extends HttpServlet {
 	  out.println("<div>저장파일명:" + filesystemName + "</div>");
 	  out.println("<div>저장경로:" + uploadPath + "</div>");
 	  out.println("<hr>");
-	  //out.println("<div><a href="/servlet/download/filename=architecture1_1709173603115.jpg">architecture1,jpg</a></div); 
+	  //out.println("<div><a href="/servlet/download/filename=architecture1_1709173603115.jpg">architecture1.jpg</a></div); 
 	  
 	  File[] files = uploadDir.listFiles();
     for( File file : files) {
      String fileName1 = file.getName(); // 파일명_1234567890.jpg
      String ext = fileName1.substring(fileName1.lastIndexOf("."));
      String fileName2 = fileName1.substring(0, fileName1.lastIndexOf("_")); // 마지막 밑줄전까지
-     out.println("<div><a href=\"/servlet/download?filename=" + URLEncoder.encode(fileName1, "UTF-8")+ "\">" + fileName2 + ext + "</a></div>");
+     out.println("<div><a href=\"/servlet/download?filename=" + URLEncoder.encode(fileName1, "UTF-8") + "\">" + fileName2 + ext + "</a></div>");
     }
 	  
 	  out.flush();
 	  out.close();
+	  
+	  
+	  
+	  
+	  
+	
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
 	  
 	}
 
@@ -85,3 +104,4 @@ public class Upload extends HttpServlet {
 	}
 
 }
+
