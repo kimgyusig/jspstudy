@@ -55,10 +55,7 @@ public class GetData1 extends HttpServlet {
 	  out.flush();
 	  out.close();
 	  
-	  
-	
-	  
-	  
+
 	}
 
 	
