@@ -117,12 +117,17 @@ public class BoardDaoImpl implements BoardDao {
   }
 
   @Override
-  public List<BoardDto> selectBoardList(Map<String, Object> map) {
+  public List<BoardDto> selectBoardList(Map<String, Object> params) {
     List<BoardDto> boardList = new ArrayList<>();
     try {
       con = dataSource.getConnection();
-      String sql = "SELECT BOARD_NO, TITLE, CONTENTS, MODIFIED_AT, CREATED_AT FROM BOARD_T ORDER BY BOARD_NO DESC";
+      String sql = "SELECT BOARD_NO, TITLE, CONTENTS, MODIFIED_AT, CREATED_AT"
+                 + "  FROM (SELECT ROW_NUMBER() OVER(ORDER BY BOARD_NO " + params.get("sort") +") AS RN,  BOARD_NO, TITLE, CONTENTS, MODIFIED_AT, CREATED_AT"
+                 + "          FROM BOARD_T)" // 행번호 붙이기 먼저하기위해서 INLINE VIEW 사용 
+                 + " WHERE RN BETWEEN ? AND ?";
       ps = con.prepareStatement(sql);
+      ps.setInt(1, (int)params.get("begin"));  // object 로 저장하여 꺼낼떼 캐스팅
+      ps.setInt(2, (int)params.get("end"));
       rs = ps.executeQuery();
       while(rs.next()) { //rs.next() 한줄씩 읽는다 데이터 개수만큼 호출
         BoardDto board = BoardDto.builder()
